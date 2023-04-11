@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+body{
+    background-color:rgb(0, 0, 0);
+}
+
+.main{
+    margin: 10% 25%;
+    background-color: rgba(253, 143, 0, 0.637);
+    padding: 20px;
+    box-shadow: 10px 10px 15px #ff7b00;
+    border-radius: 40px;
+    animation: shadowstyle 5s infinite;
+    width: 330px;
+    border: 1px solid white;
+    animation: backcolor 5s infinite;
+
+
+}
+@keyframes shadowstyle {
+    50% {box-shadow: 10px 20px 30px 30px aqua;}
+
+}
+@keyframes logintext {
+    50% {color: aqua;}
+
+}
+@keyframes backcolor {
+ 50% {background-color: red;}
+
+}
+
+
+
+
+
+.contanier{
+ 
+    border: 2px solid black;
+    padding: 10px;
+    width: 300px;
+    height: 220px;
+    margin: 0 auto;
+    border-radius:40px ;
+}
+h1{ margin-top: -6px;
+    color: rgb(255, 255, 255);
+
+margin-left: 80px;
+margin-top: 10px;}
+
+label{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#email{
+    margin-left: 37px;
+    margin-bottom: 6px;
+}
+.btn{
+    background-color: black;
+    margin-left: 110px;
+    color:salmon ;
+    font-size: 20px;
+    width: 140px;
+    margin-top: 8px;
+    border-radius: 40px;
+    animation: logintext 2s infinite  ;
+}
+
+a{
+    margin-left: 80px;
+}
+#check{
+    margin-left: 80px;
+}
+img{
+    border-radius: 100%;
+    padding: 2px;
+    width: 200px;
+    height: 200px;
+    border: 2px solid rgb(255, 255, 255);
+    margin-left: 52px;
+    margin-top: 10px;
+    background-color: black;
+object-fit: scale-down;    
+}
+
+.btn:hover{
+
+background-color: rgb(0, 238, 255);
+
+color: black;
+}
+
+
+
+
+</style>
+
+</head>
+<body>
+
+    <div class="main">
+        <img  src="site-logo.png" >
+
+<div class="contanier">
+
+    <h1>Login Form</h1>
+    <form action="">
+<div>
+        <label for="email" >Email:</label>
+<input type="email" name="" id="email" placeholder="email">
+</div>
+<div>
+<label for="password">Password:</label>
+<input type="password" name="" id="" placeholder="password">
+</div>
+<input type="button" value="Login" class="btn"><br>
+<input type="checkbox" name="Remember me" id="check">
+<label for="Rememberme">Remember me</label><br>
+<a href="#">Dont have an Account Sign up</a>
+    </form>
+</div>
+</div>
+
+</body>
+</html>
