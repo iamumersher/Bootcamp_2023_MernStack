@@ -5,13 +5,19 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import DataTable from "./Display";
 
 export default function SelectLabels() {
+  const [Rows,setRows] = React.useState(JSON.parse(localStorage.getItem('users'))?JSON.parse(localStorage.getItem('users')):[]);
   const [gender, setGender] = React.useState('');
   const [city, setCity] = React.useState('');
   const [name, setName] = React.useState('');
+  const [bb, setBb] = React.useState(true);
+  const [userid, setid] = React.useState('');
 
-  const [items,setItems]=React.useState([]);
+
+
+  const [items,setItems]=React.useState(JSON.parse(localStorage.getItem('users'))?JSON.parse(localStorage.getItem('users')):[]);
 
   const handleChange = (event) => {
     setGender(event.target.value);
@@ -25,6 +31,7 @@ export default function SelectLabels() {
 
   };
   return (
+    <>
     <div>
      <Stack direction={"column"} spacing={'10px'} marginLeft={'40%'} marginRight={'40%'} marginTop={'20px'} >
       <TextField   helperText="Please enter your name" value={name} id="name"   label="Name" onChange={handleChangename} />
@@ -59,7 +66,7 @@ export default function SelectLabels() {
           <MenuItem value={"islamabad"}>islamabad</MenuItem>
         </Select>
       </FormControl>
-      <Button variant="contained" color="success" onClick={()=>{
+      {bb?<Button variant="contained" color="success" onClick={()=>{
         setItems([...items,{
            id:items.length+1, Name:name ,Gender: gender, City: city
           }]);
@@ -69,9 +76,41 @@ export default function SelectLabels() {
         setName('');
         localStorage.setItem('users',JSON.stringify(items));
         console.log(items);
-      }} >ADD</Button>
 
+     const ls= localStorage.getItem('users');
+
+setRows(JSON.parse(ls));
+
+}} >ADD</Button>:<Button variant="contained" color="success" onClick={()=>{
+const updatedata = {
+  id:userid, Name:name ,Gender: gender, City: city
+};  
+const updatels= localStorage.getItem('users');
+const newarry=JSON.parse(updatels);
+console.log(newarry);
+if(newarry.find((user)=>user.id==updatedata.id)){
+  newarry[updatedata.id-1]={
+    id:updatedata.id, Name:name ,Gender: gender, City: city
+
+  }
+  const localStorageupdate = JSON.stringify(newarry);
+  localStorage.setItem("users",localStorageupdate);
+  
+}
+console.log(newarry[updatedata.id-1]);
+
+
+
+  setCity('');
+  setGender('');
+  setName('');
+  setid('');
+  setBb(true);
+}} >update</Button>}
      </Stack>
+     <DataTable Rows={Rows} city={setCity} gender={setGender} name={setName} Bb={setBb} userid={setid}/>
+    
     </div>
+  </>
   );
 }

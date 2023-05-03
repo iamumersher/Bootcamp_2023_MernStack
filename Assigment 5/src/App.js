@@ -1,10 +1,10 @@
 import './App.css';
-import DataTable from './Components/Display';
+import SelectLabels from './Components/Dataentry';
 
 function App() {
   return (
     <div className="App">
-    <DataTable/>
+<SelectLabels/>
     </div>
   );
 }
