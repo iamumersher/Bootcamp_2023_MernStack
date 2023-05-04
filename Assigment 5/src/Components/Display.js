@@ -52,6 +52,9 @@ const columns = [
             const newarry=localobj.filter(x=>x.id!=row.id);
             const updatearry=JSON.stringify(newarry);
             localStorage.setItem("users",updatearry);
+            const ls = localStorage.getItem('users');
+
+    props.setRows(JSON.parse(ls));
 
         
 }}>
@@ -72,7 +75,7 @@ function searchuser(){
 <>
     <Stack direction={"column"} spacing={'10px'} marginLeft={'30%'} marginRight={'30%'} marginTop={'20px'}>
      <Stack direction={'row'} spacing={'8px'} justifyContent={'center'}>
-      <TextField id="outlined-basic" label="Search by ID" variant="outlined" value={searchdata} onChange={(e)=>setSearchdata(e.target.value)}/>
+      <TextField id="outlined-basic" label="Search by name" variant="outlined" value={searchdata} onChange={(e)=>setSearchdata(e.target.value)}/>
          <Button variant='contained' color='success' onClick={searchuser} >Search</Button>
          </Stack>
 
