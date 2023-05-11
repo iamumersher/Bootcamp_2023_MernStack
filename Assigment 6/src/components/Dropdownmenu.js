@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import {useQuery} from "react-query";
 function Dropdownmenu(){
     const countries_cities =[
         { country_name: "Select Country" ,value:""},
@@ -10,11 +11,16 @@ function Dropdownmenu(){
     const[countries,setCountries] = useState("countries");
     const[cities,setCities]=useState([""]);
     const[city,setCity]=useState("");
-    const[result,setresult]=useState("");
+   
+    const fetchdata = async (c)=>{
+        const res = await fetch("https://api.openweathermap.org/data/2.5/weather?q="+c+"&appid=cd0aab3ba61e4af27742fa6aa6fd4cdd");
+       return res.json(); 
+    }       
+    const {data,status}= useQuery(fetchdata);
+
 
 function selctcountry(event){
  setCountries(event.target.value);
- setresult("");
  const selectedCities = countries_cities.find(data=> data.value && data.value===event.target.value);
  if(selectedCities){
  setCities(selectedCities.cities);
@@ -29,19 +35,15 @@ function weatherapicall(event){
     setCity(event.target.value);
     const city_temp=event.target.value;
     if(event.target.value){
+        debugger;
+      fetchdata(city_temp);
 
 
-        fetch("https://api.openweathermap.org/data/2.5/weather?q="+city_temp+"&appid=cd0aab3ba61e4af27742fa6aa6fd4cdd").then((response)=>response.json()).then((data)=>{
-                 const cel=data.main.temp-273.15;
-                 setresult("Weather of "+city_temp+" is : "+parseInt(cel)+" C°");
-            
-            
-            
-            }).catch((error)=>console.log(error));
-            console.log(event.target.value);
-                    
-    }
+  }
+                     
+    
 }
+
 
     return(
         <>
@@ -62,7 +64,11 @@ function weatherapicall(event){
 
 
 </select>
-<h1 className='result'>{result}</h1>
+<div className='result'>
+    {status ==="error" && <p> error fetching data</p> }
+    {status === "loading" && <p>fetching data...</p>}
+    {status === "success" && <p>success</p>}
+</div>
 </>
         );
 }
