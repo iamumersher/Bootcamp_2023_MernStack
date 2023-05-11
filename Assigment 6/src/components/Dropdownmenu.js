@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import {useQuery} from "react-query";
+import loadergif from "./loader.gif";
 function Dropdownmenu(){
     const countries_cities =[
         { country_name: "Select Country" ,value:""},
@@ -14,9 +15,10 @@ function Dropdownmenu(){
    
     const fetchdata = async (c)=>{
         const res = await fetch("https://api.openweathermap.org/data/2.5/weather?q="+c+"&appid=cd0aab3ba61e4af27742fa6aa6fd4cdd");
-       return res.json(); 
+
+        return res.json();
     }       
-    const {data,status}= useQuery(fetchdata);
+    const {data,status}= useQuery(['city',city],() => fetchdata(city),{enabled:!!city});
 
 
 function selctcountry(event){
@@ -33,13 +35,6 @@ function selctcountry(event){
 }
 function weatherapicall(event){
     setCity(event.target.value);
-    const city_temp=event.target.value;
-    if(event.target.value){
-        debugger;
-      fetchdata(city_temp);
-
-
-  }
                      
     
 }
@@ -66,8 +61,8 @@ function weatherapicall(event){
 </select>
 <div className='result'>
     {status ==="error" && <p> error fetching data</p> }
-    {status === "loading" && <p>fetching data...</p>}
-    {status === "success" && <p>success</p>}
+    {status === "loading" && <p><img src={loadergif} alt="loadinggif" /></p>}
+    {status === "success" && <p>Weather of {city} is : {parseInt(data.main.temp-273.15)} C°</p>}
 </div>
 </>
         );
