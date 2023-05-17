@@ -5,26 +5,26 @@ export default function ChildComponents(props){
     const results = useContext(result);
     const TextFieldRef1 = useRef(null);
     const TextFieldRef2 = useRef(null);
-   
+  
    function calCulate(){
     if(props.sign==='+'){
-        const value1 = Number(TextFieldRef1.current.value);
-        const value2 = Number(TextFieldRef2.current.value);
+        const value1 = Number(TextFieldRef1.current.getElementsByTagName('input')[0].value);
+    const value2 = Number(TextFieldRef2.current.getElementsByTagName('input')[0].value);
     const total = value1+value2;
        
 
    results.setSum(total);
 }
 else if (props.sign==='-'){
-    const value1 = Number(TextFieldRef1.current.value);
-    const value2 = Number(TextFieldRef2.current.value);
+    const value1 = Number(TextFieldRef1.current.getElementsByTagName('input')[0].value);
+    const value2 = Number(TextFieldRef2.current.getElementsByTagName('input')[0].value);
   
     const total = value1-value2;
      results.setSub(total);
 }
 else{
-    const value1 = Number(TextFieldRef1.current.value);
-    const value2 = Number(TextFieldRef2.current.value);
+    const value1 = Number(TextFieldRef1.current.getElementsByTagName('input')[0].value);
+    const value2 = Number(TextFieldRef2.current.getElementsByTagName('input')[0].value);
     const total = value1/value2;
 
     results.setDiv(total);
